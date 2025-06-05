@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LeafletMapComponent, MapMarker, MapOptions } from '../components/leaflet-map/leaflet-map.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-contact-form',
@@ -16,23 +16,23 @@ export class ContactFormComponent {
   isSubmitting = false;
   showSuccess = false;
   showError = false;
-
+  http = inject(HttpClient);
   locations: MapMarker[] = [
     {
       lat: -31.382875176171524,
-      lng: -64.2339189672631,
+      lng:  -64.2339189672631,
     },
-  ];
-
+  ]
+  
   mapOptions: MapOptions = {
-    center: [-31.382875176171524, -64.2339189672631],
+    center: [-31.382875176171524,  -64.2339189672631], 
     zoom: 13,
     markers: this.locations,
     height: '400px',
     width: '100%'
   };
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder) {
     this.contactForm = this.fb.group({
       nombre: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -51,7 +51,6 @@ export class ContactFormComponent {
       this.isSubmitting = true;
       this.showError = false;
   
-      // Usar FormData sin especificar Content-Type
       const formData = new FormData();
       formData.append('form-name', 'contacto-vendify');
       formData.append('nombre', this.contactForm.get('nombre')?.value || '');
@@ -59,7 +58,6 @@ export class ContactFormComponent {
       formData.append('telefono', this.contactForm.get('telefono')?.value || '');
       formData.append('mensaje', this.contactForm.get('mensaje')?.value || '');
   
-      // NO especificar Content-Type, deja que Angular lo maneje automáticamente
       this.http.post('/', formData).subscribe({
         next: (response) => {
           this.isSubmitting = false;
@@ -78,9 +76,9 @@ export class ContactFormComponent {
       });
     }
   }
+
   resetForm(): void {
     this.showSuccess = false;
-    this.showError = false;
     this.contactForm.reset();
     Object.keys(this.contactForm.controls).forEach(key => {
       this.contactForm.get(key)?.markAsUntouched();
