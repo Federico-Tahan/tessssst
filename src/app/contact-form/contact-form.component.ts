@@ -18,12 +18,12 @@ export class ContactFormComponent {
   locations: MapMarker[] = [
     {
       lat: -31.382875176171524,
-      lng:  -64.2339189672631,
+      lng: -64.2339189672631,
     },
-  ]
-  
+  ];
+
   mapOptions: MapOptions = {
-    center: [-31.382875176171524,  -64.2339189672631], 
+    center: [-31.382875176171524, -64.2339189672631],
     zoom: 13,
     markers: this.locations,
     height: '400px',
@@ -47,7 +47,7 @@ export class ContactFormComponent {
   onSubmit(): void {
     if (this.contactForm.valid) {
       this.isSubmitting = true;
-      
+
       setTimeout(() => {
         this.isSubmitting = false;
         this.showSuccess = true;

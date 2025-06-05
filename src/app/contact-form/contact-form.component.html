@@ -1,102 +1,84 @@
 <section class="contact-section">
-        <div class="container">
-            <!-- Header Section -->
-            <div class="contact-header">
-                <h2 class="section-title">¿Necesitás más información?</h2>
-                <p class="section-subtitle">Completá el formulario y nuestro equipo se pondrá en contacto con vos</p>
+    <div class="container">
+      <div class="contact-header">
+        <h2 class="section-title">¿Necesitás más información?</h2>
+        <p class="section-subtitle">Completá el formulario y nuestro equipo se pondrá en contacto con vos</p>
+      </div>
+  
+      <div class="contact-content">
+        <div class="form-card">
+          <!-- Netlify form compatible -->
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" name="contacto-vendify" netlify>
+            <input type="hidden" name="form-name" value="contacto-vendify">
+  
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="nombre" class="form-label">
+                  <i class="fas fa-user"></i> Nombre completo
+                </label>
+                <input id="nombre" type="text" formControlName="nombre" class="form-input" placeholder="Tu nombre y apellido" />
+                <div class="error-message" *ngIf="isFieldInvalid('nombre')">El nombre es requerido</div>
+              </div>
+  
+              <div class="form-group">
+                <label for="email" class="form-label">
+                  <i class="fas fa-envelope"></i> Email
+                </label>
+                <input id="email" type="email" formControlName="email" class="form-input" placeholder="tu@email.com" />
+                <div class="error-message" *ngIf="isFieldInvalid('email')">Ingresá un email válido</div>
+              </div>
+  
+              <div class="form-group">
+                <label for="telefono" class="form-label">
+                  <i class="fas fa-phone"></i> Teléfono
+                </label>
+                <input id="telefono" type="tel" formControlName="telefono" class="form-input" placeholder="+54 9 351 123-4567" />
+                <div class="error-message" *ngIf="isFieldInvalid('telefono')">El teléfono es requerido</div>
+              </div>
+  
+              <div class="form-group full-width">
+                <label for="mensaje" class="form-label">
+                  <i class="fas fa-comment-alt"></i> Mensaje
+                </label>
+                <textarea id="mensaje" formControlName="mensaje" class="form-textarea"
+                  placeholder="Contanos sobre tu proyecto, cantidad de máquinas necesarias, ubicación, etc."
+                  rows="5"></textarea>
+                <div class="error-message" *ngIf="isFieldInvalid('mensaje')">El mensaje es requerido</div>
+              </div>
+  
+              <div class="form-actions">
+                <button type="submit" class="submit-btn" [disabled]="isSubmitting">
+                  <i class="fas fa-paper-plane"></i> Enviar consulta
+                </button>
+              </div>
             </div>
-
-            <div class="contact-content">
-                <!-- Contact Form -->
-                <div class="form-card">
-                    <form id="contactForm" class="contact-form" name="contacto-vendify"  method="POST" netlify>
-                        <input type="hidden" name="form-name" value="contacto-vendify">
-                        <div class="form-grid">
-                            <!-- Nombre -->
-                            <div class="form-group">
-                                <label for="nombre" class="form-label">
-                                    <i class="fas fa-user"></i>
-                                    Nombre completo
-                                </label>
-                                <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Tu nombre y apellido" required>
-                                <div class="error-message" id="nombreError">
-                                    El nombre es requerido
-                                </div>
-                            </div>
-                    
-                            <!-- Email -->
-                            <div class="form-group">
-                                <label for="email" class="form-label">
-                                    <i class="fas fa-envelope"></i>
-                                    Email
-                                </label>
-                                <input type="email" id="email" name="email" class="form-input" placeholder="tu@email.com" required>
-                                <div class="error-message" id="emailError">
-                                    Ingresá un email válido
-                                </div>
-                            </div>
-                    
-                            <!-- Teléfono -->
-                            <div class="form-group">
-                                <label for="telefono" class="form-label">
-                                    <i class="fas fa-phone"></i>
-                                    Teléfono
-                                </label>
-                                <input type="tel" id="telefono" name="telefono" class="form-input" placeholder="+54 9 351 123-4567" required>
-                                <div class="error-message" id="telefonoError">
-                                    El teléfono es requerido
-                                </div>
-                            </div>
-                    
-                            <div class="form-group full-width">
-                                <label for="mensaje" class="form-label">
-                                    <i class="fas fa-comment-alt"></i>
-                                    Mensaje
-                                </label>
-                                <textarea id="mensaje" name="mensaje" class="form-textarea" 
-                                    placeholder="Contanos sobre tu proyecto, cantidad de máquinas necesarias, ubicación, etc." 
-                                    rows="5" required></textarea>
-                                <div class="error-message" id="mensajeError">
-                                    El mensaje es requerido
-                                </div>
-                            </div>
-                    
-                            <div class="form-actions">
-                                <button type="submit" class="submit-btn" id="submitBtn">
-                                    <i class="fas fa-paper-plane"></i>
-                                    Enviar consulta
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div class="success-message" id="successMessage">
-                        <div class="success-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <h3>¡Consulta enviada exitosamente!</h3>
-                        <p>Nuestro equipo se pondrá en contacto con vos en las próximas 24 horas.</p>
-                        <button class="new-form-btn" id="newFormBtn">
-                            Nueva consulta
-                        </button>
-                    </div>
-                </div>
-
-                <div class="info-cards">
-                    <div class="info-card">
-                        <div class="info-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <h4>Datos de contacto</h4>
-                        <p>Teléfono: <span class="highlight"> +54 9 XXX XXX</span></p>
-                        <p>Email: <span class="highlight"> vendify9&#64;gmail.com </span></p>
-
-                    </div>
-                    
-                    <div class="info-card-map">
-                        <app-leaflet-map [options]="mapOptions"></app-leaflet-map>
-                    </div>
-                </div>
+          </form>
+  
+          <div class="success-message" *ngIf="showSuccess">
+            <div class="success-icon">
+              <i class="fas fa-check-circle"></i>
             </div>
+            <h3>¡Consulta enviada exitosamente!</h3>
+            <p>Nuestro equipo se pondrá en contacto con vos en las próximas 24 horas.</p>
+            <button class="new-form-btn" (click)="resetForm()">Nueva consulta</button>
+          </div>
         </div>
-    </section>
+  
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <h4>Datos de contacto</h4>
+            <p>Teléfono: <span class="highlight"> +54 9 XXX XXX</span></p>
+            <p>Email: <span class="highlight"> vendify9@gmail.com </span></p>
+          </div>
+  
+          <div class="info-card-map">
+            <app-leaflet-map [options]="mapOptions"></app-leaflet-map>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
