@@ -50,21 +50,17 @@ export class ContactFormComponent {
     if (this.contactForm.valid) {
       this.isSubmitting = true;
       this.showError = false;
-
-      // Preparar datos para Netlify
+  
+      // Usar FormData sin especificar Content-Type
       const formData = new FormData();
       formData.append('form-name', 'contacto-vendify');
-      formData.append('nombre', this.contactForm.get('nombre')?.value);
-      formData.append('email', this.contactForm.get('email')?.value);
-      formData.append('telefono', this.contactForm.get('telefono')?.value);
-      formData.append('mensaje', this.contactForm.get('mensaje')?.value);
-
-      // Enviar a Netlify
-      this.http.post('/', formData, {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/x-www-form-urlencoded'
-        })
-      }).subscribe({
+      formData.append('nombre', this.contactForm.get('nombre')?.value || '');
+      formData.append('email', this.contactForm.get('email')?.value || '');
+      formData.append('telefono', this.contactForm.get('telefono')?.value || '');
+      formData.append('mensaje', this.contactForm.get('mensaje')?.value || '');
+  
+      // NO especificar Content-Type, deja que Angular lo maneje automáticamente
+      this.http.post('/', formData).subscribe({
         next: (response) => {
           this.isSubmitting = false;
           this.showSuccess = true;
@@ -82,7 +78,6 @@ export class ContactFormComponent {
       });
     }
   }
-
   resetForm(): void {
     this.showSuccess = false;
     this.showError = false;
