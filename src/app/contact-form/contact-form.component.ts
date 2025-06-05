@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LeafletMapComponent, MapMarker, MapOptions } from '../components/leaflet-map/leaflet-map.component';
 import { HttpClient } from '@angular/common/http';
+import { AnalyticsService } from '../services/analytics.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -17,6 +18,8 @@ export class ContactFormComponent {
   showSuccess = false;
   showError = false;
   http = inject(HttpClient);
+  analytics = inject(AnalyticsService); 
+
   locations: MapMarker[] = [
     {
       lat: -31.382875176171524,
@@ -47,6 +50,10 @@ export class ContactFormComponent {
   }
 
   onSubmit(): void {
+    this.analytics.trackButtonClick('contact_form_submit', {
+      section: 'contact_form',
+      form_valid: this.contactForm.valid
+    });
     if (this.contactForm.valid) {
       this.isSubmitting = true;
       this.showError = false;
