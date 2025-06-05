@@ -20,7 +20,7 @@ export class ContactFormComponent {
       lat: -31.382875176171524,
       lng:  -64.2339189672631,
     },
-  ];
+  ]
   
   mapOptions: MapOptions = {
     center: [-31.382875176171524,  -64.2339189672631], 
@@ -44,41 +44,15 @@ export class ContactFormComponent {
     return !!(field && field.invalid && (field.dirty || field.touched));
   }
 
-  async onSubmit(): Promise<void> {
+  onSubmit(): void {
     if (this.contactForm.valid) {
       this.isSubmitting = true;
       
-      const formData = new FormData();
-      formData.append('nome', this.contactForm.get('nombre')?.value);
-      formData.append('email', this.contactForm.get('email')?.value);
-      formData.append('assunto', `Consulta de ${this.contactForm.get('nombre')?.value}`);
-      formData.append('mensagem', `
-        Nombre: ${this.contactForm.get('nombre')?.value}
-        Email: ${this.contactForm.get('email')?.value}
-        Teléfono: ${this.contactForm.get('telefono')?.value}
-        
-        Mensaje:
-        ${this.contactForm.get('mensaje')?.value}
-      `);
-      formData.append('_subject', 'Nueva consulta desde el sitio web');
-
-      try {
-        const response = await fetch('https://formsubmit.co/fedetahan8@gmail.com', {
-          method: 'POST',
-          body: formData
-        });
-
-        if (response.ok) {
-          this.isSubmitting = false;
-          this.showSuccess = true;
-        } else {
-          this.isSubmitting = false;
-          alert('Hubo un error al enviar el formulario. Por favor, intentá nuevamente.');
-        }
-      } catch (error) {
+      setTimeout(() => {
         this.isSubmitting = false;
-        alert('Hubo un error al enviar el formulario. Por favor, intentá nuevamente.');
-      }
+        this.showSuccess = true;
+        console.log('Formulario enviado:', this.contactForm.value);
+      }, 2000);
     } else {
       Object.keys(this.contactForm.controls).forEach(key => {
         this.contactForm.get(key)?.markAsTouched();
