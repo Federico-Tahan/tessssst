@@ -1,0 +1,78 @@
+.support-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border: 2px solid #f1f5f9;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #3B82F6, #10B981);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    border-color: #3B82F6;
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.15);
+
+    &::before {
+      transform: scaleX(1);
+    }
+
+    .support-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+  }
+
+  .support-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #3B82F6, #10B981);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.75rem;
+    margin: 0 auto 1.5rem;
+    transition: transform 0.3s ease;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #6B7280;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+  }
+}
+
+// Estilos globales para highlight
+:host ::ng-deep .highlight {
+  background: linear-gradient(135deg, #3B82F6, #10B981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+}

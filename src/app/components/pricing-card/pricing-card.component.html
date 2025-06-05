@@ -1,0 +1,28 @@
+<div class="pricing-card" 
+     [ngClass]="cardClass" 
+     [class.featured]="isFeatured">
+  
+  <div *ngIf="isFeatured" class="featured-badge">{{ featuredText }}</div>
+  
+  <div class="pricing-header-card">
+    <div class="pricing-icon">
+      <i [class]="iconClass"></i>
+    </div>
+    <h3>{{ title }}</h3>
+    <p class="pricing-subtitle">{{ subtitle }}</p>
+  </div>
+  
+  <div class="pricing-content">
+    <div class="price-tag">
+      <span class="price-text">{{ priceText }}</span>
+      <span *ngIf="priceNote" class="price-note">{{ priceNote }}</span>
+    </div>
+    
+    <ul class="pricing-features">
+      <li *ngFor="let feature of features">
+        <i [class]="feature.icon || 'fas fa-check'"></i> 
+        {{ feature.text }}
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<!-- Mobile Navigation Overlay -->
+<div class="mobile-nav" [class.active]="isMobileMenuOpen">
+  <button class="mobile-close" (click)="closeMobileMenu()">
+    <i class="fas fa-times"></i>
+  </button>
+  
+  <div class="mobile-logo">Vendify</div>
+  
+  <a *ngFor="let link of navLinks" 
+     [href]="link.href" 
+     (click)="scrollToSection($event, link.href)">
+    {{ link.label }}
+  </a>
+  
+  <a href="#contacto" class="cta-primary" (click)="scrollToSection($event, '#contacto')">
+    Cotizar ahora
+  </a>
+</div>
+
+<!-- Main Navbar -->
+<nav class="navbar" (window:scroll)="onScroll()">
+  <div class="nav-container">
+    <div class="logo" [class.visible]="isLogoVisible">
+      Vendify
+    </div>
+    
+    <ul class="nav-links">
+      <li *ngFor="let link of navLinks">
+        <a [href]="link.href" (click)="scrollToSection($event, link.href)">
+          {{ link.label }}
+        </a>
+      </li>
+    </ul>
+    
+    <a href="#contacto" class="nav-cta" (click)="scrollToSection($event, '#contacto')">
+      Cotizar ahora
+    </a>
+    
+    <button class="mobile-menu" (click)="toggleMobileMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</nav>

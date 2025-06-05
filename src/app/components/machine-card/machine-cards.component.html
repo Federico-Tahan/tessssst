@@ -1,0 +1,37 @@
+<div class="machine-card">
+  <div class="machine-image" (click)="onImageClick()">
+    <img [src]="machine.image" [alt]="machine.name">
+    <div class="image-overlay">
+      <i class="fas fa-search-plus"></i>
+    </div>
+  </div>
+  <div class="machine-info">
+    <h3 class="machine-name">{{ machine.name }}</h3>
+    <ul class="machine-specs">
+      <li *ngFor="let spec of machine.specs">
+        <i [class]="spec.icon"></i>
+        <span [innerHTML]="formatSpecText(spec)"></span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="image-modal" 
+     [class.active]="isModalOpen" 
+     (click)="closeModal()"
+     *ngIf="isModalOpen">
+  <div class="modal-content">
+    <button class="modal-close" (click)="closeModal()" aria-label="Cerrar">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="modal-image-container">
+      <img [src]="machine.image" 
+           [alt]="machine.name" 
+           class="modal-image"
+           (click)="onModalImageClick($event)">
+    </div>
+    <div class="modal-caption">
+      <h4>{{ machine.name }}</h4>
+    </div>
+  </div>
+</div>

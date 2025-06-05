@@ -1,0 +1,29 @@
+<section class="testimonials-section">
+    <div class="container">
+      <div class="testimonials-header">
+        <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+        <p class="section-subtitle">Experiencias reales de quienes confían en Vendify</p>
+      </div>
+  
+      <div class="testimonials-slider" 
+           (mouseenter)="onMouseEnter()" 
+           (mouseleave)="onMouseLeave()">
+        <div class="testimonials-track" 
+             [style.transform]="getTransform()"
+             [class.transitioning]="isTransitioning">
+          @for (testimonial of testimonials; track testimonial.id) {
+            <div class="testimonial-slide" [style.width]="getSlideWidth()">
+              <app-testimonial-card
+                [name]="testimonial.name"
+                [role]="testimonial.role"
+                [company]="testimonial.company"
+                [message]="testimonial.message"
+                [rating]="testimonial.rating"
+                [avatar]="testimonial.avatar">
+              </app-testimonial-card>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>

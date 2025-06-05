@@ -1,0 +1,22 @@
+<div class="map-showcase">
+    <div class="container">
+        <h2 class="section-title">Nuestras Ubicaciones</h2>
+        <p class="section-subtitle">Encontranos en toda la ciudad de Córdoba</p>
+
+        <div class="map-wrapper">
+            <app-leaflet-map [options]="mapOptions"></app-leaflet-map>
+        </div>
+
+        <div class="locations-grid">
+            <div class="location-card" *ngFor="let location of locations">
+                <div class="location-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="location-info">
+                    <h4>{{ location.title }}</h4>
+                    <p>{{ location.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="map-container">
+    <div #mapElement class="map-element" [style.height]="options.height || '400px'"
+        [style.width]="options.width || '100%'">
+    </div>
+    <div class="map-loading" *ngIf="isLoading">
+        <div class="spinner"></div>
+        <p>Cargando mapa...</p>
+    </div>
+</div>

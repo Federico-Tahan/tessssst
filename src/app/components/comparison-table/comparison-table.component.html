@@ -1,0 +1,47 @@
+<div class="comparison-table">
+  
+  <!-- Desktop Table -->
+  <div class="desktop-table">
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Beneficio</th>
+            <th>Venta</th>
+            <th>Alquiler</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of data; index as i">
+            <td style="font-weight: 600">{{ row.feature }}</td>
+            <td [ngClass]="'type-' + row.ventaType">{{ row.venta }}</td>
+            <td [ngClass]="'type-' + row.alquilerType">{{ row.alquiler }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-aclaration">*Financiación disponible a 6–12 cuotas.</p>
+  </div>
+
+  <!-- Mobile Cards -->
+  <div class="mobile-cards">
+    <!-- Venta Card -->
+    <div class="comparison-card">
+      <div class="card-header">Venta</div>
+      <div *ngFor="let row of data" class="comparison-row">
+        <span class="feature-name">{{ row.feature }}</span>
+        <span class="feature-value" [ngClass]="'type-' + row.ventaType">{{ row.venta }}</span>
+      </div>
+    </div>
+
+    <!-- Alquiler Card -->
+    <div class="comparison-card">
+      <div class="card-header">Alquiler</div>
+      <div *ngFor="let row of data" class="comparison-row">
+        <span class="feature-name">{{ row.feature }}</span>
+        <span class="feature-value" [ngClass]="'type-' + row.alquilerType">{{ row.alquiler }}</span>
+      </div>
+    </div>
+    <p class="table-aclaration">*Financiación disponible a 6–12 cuotas.</p>
+  </div>
+</div>
