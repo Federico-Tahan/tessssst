@@ -7,11 +7,10 @@
   
       <div class="contact-content">
         <div class="form-card">
-          <!-- Netlify form compatible -->
-          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" name="contacto-vendify" netlify>
-            <input type="hidden" name="form-name" value="contacto-vendify">
-  
+          <!-- Formulario Angular que envía a Netlify -->
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
             <div class="form-grid">
+              <!-- Tus campos existentes... -->
               <div class="form-group">
                 <label for="nombre" class="form-label">
                   <i class="fas fa-user"></i> Nombre completo
@@ -48,12 +47,14 @@
   
               <div class="form-actions">
                 <button type="submit" class="submit-btn" [disabled]="isSubmitting">
-                  <i class="fas fa-paper-plane"></i> Enviar consulta
+                  <i class="fas fa-paper-plane"></i> 
+                  {{ isSubmitting ? 'Enviando...' : 'Enviar consulta' }}
                 </button>
               </div>
             </div>
           </form>
   
+          <!-- Mensaje de éxito -->
           <div class="success-message" *ngIf="showSuccess">
             <div class="success-icon">
               <i class="fas fa-check-circle"></i>
@@ -62,23 +63,14 @@
             <p>Nuestro equipo se pondrá en contacto con vos en las próximas 24 horas.</p>
             <button class="new-form-btn" (click)="resetForm()">Nueva consulta</button>
           </div>
-        </div>
   
-        <div class="info-cards">
-          <div class="info-card">
-            <div class="info-icon">
-              <i class="fas fa-phone"></i>
-            </div>
-            <h4>Datos de contacto</h4>
-            <p>Teléfono: <span class="highlight"> +54 9 XXX XXX</span></p>
-            <p>Email: <span class="highlight"> vendify9gmail.com </span></p>
-          </div>
-  
-          <div class="info-card-map">
-            <app-leaflet-map [options]="mapOptions"></app-leaflet-map>
+          <!-- Mensaje de error -->
+          <div class="error-message" *ngIf="showError">
+            <p>Hubo un error al enviar el formulario. Por favor, intentá nuevamente.</p>
           </div>
         </div>
+  
+        <!-- Resto de tu contenido... -->
       </div>
     </div>
   </section>
-  
